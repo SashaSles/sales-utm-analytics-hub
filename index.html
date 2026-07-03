@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sales-to-Marketing Analytics Hub for constructing campaign URLs, cleaning web addresses, and deriving real-time click and sales performance insights.">
+    <title>Sales-to-Marketing Analytics Hub</title>
+    <!-- Google Fonts: Outfit for modern, clean dashboard styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for professional dashboard icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           Sales-to-Marketing Analytics Hub CSS Stylesheet
+           Theme: Professional Slate-Blue Premium Business Dashboard
+           ========================================================================== */
+
+        /* Modern CSS Reset & Variable Design Tokens */
+        :root {
+            --bg-app: #0b0f19;
+            --bg-dashboard: radial-gradient(circle at top left, #1e293b 0%, #0f172a 40%, #020617 100%);
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --bg-card-hover: rgba(30, 41, 59, 0.5);
+            --bg-console: #090d16;
+            
+            --color-primary: #3b82f6;
+            --color-primary-glow: rgba(59, 130, 246, 0.25);
+            --color-primary-hover: #2563eb;
+            --color-accent-cyan: #06b6d4;
+            --color-accent-cyan-glow: rgba(6, 182, 212, 0.2);
+            --color-accent-purple: #8b5cf6;
+            --color-accent-purple-glow: rgba(139, 92, 246, 0.25);
+            
+            --color-success: #10b981;
+            --color-success-bg: rgba(16, 185, 129, 0.1);
+            --color-danger: #ef4444;
+            --color-danger-bg: rgba(239, 68, 68, 0.1);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-hover: rgba(255, 255, 255, 0.15);
+            
+            --border-radius-sm: 6px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            
+            --font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-app);
+            background-image: var(--bg-dashboard);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            min-height: 100vh;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* App Wrapper Layout */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Header Component */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .header-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px var(--color-primary-glow);
+        }
+
+        .logo-title h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-title .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.1rem;
+            font-weight: 300;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-indicator-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--color-success);
+        }
+
+        /* Animations */
+        .animate-pulse {
+            animation: statusPulse 2s infinite alternate;
+        }
+
+        @keyframes statusPulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 12px var(--color-success); }
+        }
+
+        /* Dashboard Core Grid Layout */
+        .dashboard-main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* Dashboard Panels Base Card */
+        .dashboard-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: border var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .dashboard-section:hover {
+            border-color: var(--border-color-hover);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .section-header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .section-header-title i {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+        }
+
+        .section-header-title h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        /* Badges styling */
+        .skill-badge {
+            background: var(--color-primary-glow);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .skill-badge-purple {
+            background: var(--color-accent-purple-glow);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .records-count {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Sales Input Form Styles */
+        .campaign-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .form-group label i {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-group .required {
+            color: var(--color-danger);
+            font-weight: bold;
+        }
+
+        /* Styled Text Inputs */
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.85rem 2.5rem 0.85rem 1rem;
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-family);
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: all var(--transition-fast);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-glow), inset 0 2px 4px rgba(0,0,0,0.2);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .input-clear {
+            position: absolute;
+            right: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: none;
+            transition: color var(--transition-fast);
+        }
+
+        .input-clear:hover {
+            color: var(--text-primary);
+        }
+
+        /* Styled Select Dropdowns */
+        .select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .select-wrapper::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 1rem;
+            color: var(--text-muted);
+            pointer-events: none;
+            font-size: 0.8rem;
+            transition: transform var(--transition-fast);
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.85rem 2.5rem 0.85rem 1rem;
+            border-radius: var(--border-radius-md);
+            font-family: var(--font-family);
+            font-size: 0.95rem;
+            font-weight: 400;
+            appearance: none;
+            -webkit-appearance: none;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .select-wrapper select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-glow), inset 0 2px 4px rgba(0,0,0,0.2);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .select-wrapper:focus-within::after {
+            transform: rotate(180deg);
+        }
+
+        .select-wrapper select option {
+            background: #0f172a;
+            color: var(--text-primary);
+            padding: 0.5rem;
+        }
+
+        /* Error Messages and Input Validation states */
+        .error-msg {
+            font-size: 0.75rem;
+            color: var(--color-danger);
+            margin-top: 0.25rem;
+            display: none;
+            font-weight: 500;
+        }
+
+        .form-group.invalid input,
+        .form-group.invalid select {
+            border-color: var(--color-danger);
+            box-shadow: 0 0 0 3px var(--color-danger-bg);
+        }
+
+        .form-group.invalid .error-msg {
+            display: block;
+        }
+
+        /* Button & Action Items styling */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.85rem 2rem;
+            border-radius: var(--border-radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent-cyan));
+            color: white;
+            box-shadow: 0 4px 15px var(--color-primary-glow);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transition: left 0.6s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4), 0 0 10px var(--color-accent-cyan-glow);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px var(--color-primary-glow);
+        }
+
+        /* Table Area styles */
+        .table-responsive {
+            overflow-x: auto;
+            width: 100%;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .data-table th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr {
+            transition: background var(--transition-fast);
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* URL and data cells */
+        .url-cell {
+            font-family: monospace;
+            color: var(--color-accent-cyan);
+            font-size: 0.85rem;
+            max-width: 320px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .url-cell-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: color var(--transition-fast), background var(--transition-fast);
+        }
+
+        .btn-copy:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .timestamp-cell {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .rep-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .rep-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-primary-glow);
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(59,130,246,0.3);
+        }
+
+        .rep-avatar.Alex { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.4); }
+        .rep-avatar.John { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.4); }
+        .rep-avatar.Maria { background: rgba(139, 92, 246, 0.15); color: #c084fc; border-color: rgba(139, 92, 246, 0.4); }
+        .rep-avatar.Sasha { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
+
+        .channel-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+            justify-content: center;
+        }
+
+        .channel-tag i {
+            font-size: 0.75rem;
+        }
+
+        /* Click Badge */
+        .click-badge {
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.25);
+            color: #34d399;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-family: monospace;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Simulated dynamic insertion and incrementing highlight animations */
+        @keyframes highlightRow {
+            0% { background: rgba(59, 130, 246, 0.25); }
+            100% { background: transparent; }
+        }
+
+        .row-highlight {
+            animation: highlightRow 1s forwards;
+        }
+
+        @keyframes clickPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); background-color: var(--color-success); color: #fff; }
+            100% { transform: scale(1); }
+        }
+
+        .badge-pop {
+            animation: clickPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes fadeInRow {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .row-fade-in {
+            animation: fadeInRow 0.4s ease-out forwards;
+        }
+
+        /* Click Simulator Button */
+        .btn-simulate {
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.4rem 0.85rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-simulate:hover {
+            background: var(--color-success);
+            color: #0b0f19;
+            border-color: var(--color-success);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-simulate:active {
+            transform: scale(0.95);
+        }
+
+        /* Insights Panel Styles */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .metric-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: transform var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .clicks-bg {
+            background: var(--color-primary-glow);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .rep-bg {
+            background: var(--color-accent-purple-glow);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.25);
+        }
+
+        .channel-bg {
+            background: var(--color-accent-cyan-glow);
+            color: #22d3ee;
+            border: 1px solid rgba(6, 182, 212, 0.25);
+        }
+
+        .metric-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .metric-val {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: opacity 0.2s ease;
+        }
+
+        .metric-bounce {
+            animation: metricPop 0.3s ease-out;
+        }
+
+        @keyframes metricPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); color: var(--color-primary); }
+            100% { transform: scale(1); }
+        }
+
+        /* Code Console box for natural language analyst insights */
+        .analyst-console {
+            background: var(--bg-console);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: var(--border-radius-md);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .console-header {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 0.6rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .console-dots {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .console-dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .console-dots .dot.red { background-color: #ef4444; }
+        .console-dots .dot.yellow { background-color: #eab308; }
+        .console-dots .dot.green { background-color: #22c55e; }
+
+        .console-title {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .console-body {
+            padding: 1.25rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .console-prompt {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .console-output {
+            color: #e2e8f0;
+            min-height: 48px;
+        }
+
+        /* Typing Effect styles */
+        .typing-effect {
+            border-right: 2px solid var(--color-accent-purple);
+            white-space: normal;
+            animation: blinkCursor 0.75s step-end infinite;
+            word-break: break-word;
+        }
+
+        @keyframes blinkCursor {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--color-accent-purple); }
+        }
+
+        /* Table Filtering and Sorting Controls styling */
+        .table-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.3);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .table-controls .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .table-controls label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .select-wrapper-sm select {
+            padding: 0.5rem 2.2rem 0.5rem 0.75rem !important;
+            font-size: 0.85rem !important;
+            border-radius: var(--border-radius-sm) !important;
+            height: auto !important;
+        }
+
+        .select-wrapper-sm::after {
+            right: 0.75rem !important;
+            font-size: 0.7rem !important;
+        }
+
+        .search-input-wrapper input {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-family);
+            font-size: 0.85rem;
+            width: 180px;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input-wrapper input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-glow);
+        }
+
+        .sortable-header {
+            transition: color var(--transition-fast);
+        }
+
+        .sortable-header:hover {
+            color: var(--color-accent-cyan) !important;
+        }
+
+        .sort-arrow {
+            display: inline-block;
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+            color: var(--color-accent-cyan);
+            vertical-align: middle;
+        }
+
+        /* Pagination Controls styling */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination-btn {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .pagination-num {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+        }
+
+        .pagination-num:hover:not(.active) {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pagination-num.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary-glow);
+        }
+
+        /* Footer Section */
+        .app-footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation / Header -->
+        <header class="app-header">
+            <div class="header-logo-section">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="logo-title">
+                    <h1>Sales-to-Marketing Analytics Hub</h1>
+                    <p class="subtitle">Unified tracking dashboard for marketing campaigns and sales outreach</p>
+                </div>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator-dot animate-pulse"></span>
+                <span class="status-text">3 Agent Skills Operational</span>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <main class="dashboard-main">
+            
+            <!-- Section 1: Sales Campaign Input Form -->
+            <section class="dashboard-section form-section" aria-labelledby="form-section-title">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <i class="fa-solid fa-link"></i>
+                        <h2 id="form-section-title">Campaign Link Generator</h2>
+                    </div>
+                    <span class="skill-badge" title="Powered by link-constructor & data-cleaner skills">
+                        <i class="fa-solid fa-robot"></i> Skills: Active
+                    </span>
+                </div>
+                
+                <form id="campaign-form" class="campaign-form" novalidate>
+                    <div class="form-grid">
+                        <!-- Input: Base URL -->
+                        <div class="form-group url-group">
+                            <label for="base-url">
+                                <i class="fa-solid fa-globe"></i> Base Landing URL <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="base-url" 
+                                    placeholder="e.g., https://mycompany.com/pricing" 
+                                    required
+                                >
+                                <span class="input-clear" id="url-clear-btn" title="Clear input">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                </span>
+                            </div>
+                            <span class="error-msg" id="url-error">Please enter a valid URL</span>
+                        </div>
+
+                        <!-- Dropdown: Sales Rep Name -->
+                        <div class="form-group">
+                            <label for="sales-rep">
+                                <i class="fa-solid fa-user-tie"></i> Sales Representative <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="sales-rep" required>
+                                    <option value="" disabled selected>Select Rep Name</option>
+                                    <option value="Alex">Alex</option>
+                                    <option value="John">John</option>
+                                    <option value="Maria">Maria</option>
+                                    <option value="Sasha">Sasha</option>
+                                </select>
+                            </div>
+                            <span class="error-msg" id="rep-error">Please select a representative</span>
+                        </div>
+
+                        <!-- Dropdown: Marketing Channel -->
+                        <div class="form-group">
+                            <label for="channel">
+                                <i class="fa-solid fa-share-nodes"></i> Outreach Channel <span class="required">*</span>
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="channel" required>
+                                    <option value="" disabled selected>Select Channel</option>
+                                    <option value="LinkedIn DM">LinkedIn DM</option>
+                                    <option value="Cold Email">Cold Email</option>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="Proposal PDF">Proposal PDF</option>
+                                </select>
+                            </div>
+                            <span class="error-msg" id="channel-error">Please select a channel</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submit-btn" class="btn btn-primary">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate & Log Link
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Section 2: Live Campaign Data Table -->
+            <section class="dashboard-section table-section" aria-labelledby="table-section-title">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h2 id="table-section-title">Active Campaign Links Log</h2>
+                    </div>
+                    <span class="records-count" id="log-count">4 URLs Logged</span>
+                </div>
+
+                <!-- Filtering and Sorting Controls -->
+                <div class="table-controls">
+                    <!-- Filter: Channel -->
+                    <div class="control-group">
+                        <label for="filter-channel">Filter by Channel:</label>
+                        <div class="select-wrapper select-wrapper-sm">
+                            <select id="filter-channel">
+                                <option value="all">All Channels</option>
+                                <option value="LinkedIn DM">LinkedIn DM</option>
+                                <option value="Cold Email">Cold Email</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Proposal PDF">Proposal PDF</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Filter: Sales Rep -->
+                    <div class="control-group">
+                        <label for="filter-rep">Filter by Rep:</label>
+                        <div class="select-wrapper select-wrapper-sm">
+                            <select id="filter-rep">
+                                <option value="all">All Reps</option>
+                                <option value="Sasha">Sasha</option>
+                                <option value="Maria">Maria</option>
+                                <option value="Alex">Alex</option>
+                                <option value="John">John</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search: URL -->
+                    <div class="control-group">
+                        <label for="search-url">Search URL:</label>
+                        <div class="search-input-wrapper">
+                            <input type="text" id="search-url" placeholder="Search cleaned URL...">
+                        </div>
+                    </div>
+
+                    <!-- Sort: Clicks -->
+                    <div class="control-group">
+                        <label for="sort-clicks">Sort by Clicks:</label>
+                        <div class="select-wrapper select-wrapper-sm">
+                            <select id="sort-clicks">
+                                <option value="none">Default (Newest First)</option>
+                                <option value="high-to-low">Click Count (High to Low)</option>
+                                <option value="low-to-high">Click Count (Low to High)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="campaign-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Sales Rep</th>
+                                <th>Campaign</th>
+                                <th>Channel</th>
+                                <th>Full Cleaned URL</th>
+                                <th id="th-clicks" class="sortable-header" style="cursor: pointer; user-select: none;">Total Clicks <span id="clicks-sort-arrow"></span></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Populated dynamically via app.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Control Bar -->
+                <div class="pagination-container" id="pagination-controls"></div>
+            </section>
+
+            <!-- Section 3: Insights Panel -->
+            <section class="dashboard-section insights-section" aria-labelledby="insights-section-title">
+                <div class="section-header">
+                    <div class="section-header-title">
+                        <i class="fa-solid fa-brain"></i>
+                        <h2 id="insights-section-title">Performance Insights & Intelligence</h2>
+                    </div>
+                    <span class="skill-badge-purple" title="Powered by analytics-analyst skill">
+                        <i class="fa-solid fa-microchip"></i> Skill: analytics-analyst
+                    </span>
+                </div>
+
+                <!-- Metrics Dashboard Grid -->
+                <div class="insights-grid">
+                    <!-- Metric 1: Total Clicks -->
+                    <div class="metric-card" id="card-total-clicks">
+                        <div class="metric-icon clicks-bg">
+                            <i class="fa-solid fa-mouse-pointer"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Cumulative Clicks</span>
+                            <h3 class="metric-val" id="metric-total-clicks">0</h3>
+                        </div>
+                    </div>
+
+                    <!-- Metric 2: Top Sales Rep -->
+                    <div class="metric-card" id="card-top-rep">
+                        <div class="metric-icon rep-bg">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Top Sales Rep</span>
+                            <h3 class="metric-val" id="metric-top-rep">-</h3>
+                        </div>
+                    </div>
+
+                    <!-- Metric 3: Top Channel -->
+                    <div class="metric-card" id="card-top-channel">
+                        <div class="metric-icon channel-bg">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-label">Top Channel</span>
+                            <h3 class="metric-val" id="metric-top-channel">-</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analyst Text Breakdown Console -->
+                <div class="analyst-console">
+                    <div class="console-header">
+                        <div class="console-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="console-title">analytics-analyst-console.sh</span>
+                    </div>
+                    <div class="console-body">
+                        <p class="console-prompt">$ run analytics-analyst --parse-realtime</p>
+                        <div class="console-output">
+                            <p id="insights-text-breakdown" class="typing-effect">
+                                Generating real-time analytics breakdown...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- App Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 Sales-to-Marketing Analytics Hub. Designed with professional dark-slate aesthetics.</p>
+        </footer>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        /* ==========================================================================
+           Sales-to-Marketing Analytics Hub - Client-Side JavaScript Logic
+           Implements 3 Agentic Skills: link-constructor, data-cleaner, analytics-analyst
+           ========================================================================== */
+
+        // --- Global Application State ---
+        const campaignLogs = [
+            {
+                id: 'log-1',
+                timestamp: '2026-06-30 14:15:22',
+                salesRep: 'Alex',
+                campaign: 'sales_outreach_2026',
+                channel: 'LinkedIn DM',
+                fullURL: 'https://acme.co/demo?utm_source=alex&utm_medium=linkedin_dm&utm_campaign=sales_outreach_2026',
+                clicks: 12
+            },
+            {
+                id: 'log-2',
+                timestamp: '2026-06-30 15:30:10',
+                salesRep: 'Maria',
+                campaign: 'sales_outreach_2026',
+                channel: 'Cold Email',
+                fullURL: 'https://acme.co/blog/post?utm_source=maria&utm_medium=cold_email&utm_campaign=sales_outreach_2026',
+                clicks: 8
+            },
+            {
+                id: 'log-3',
+                timestamp: '2026-06-30 16:45:00',
+                salesRep: 'John',
+                campaign: 'sales_outreach_2026',
+                channel: 'WhatsApp',
+                fullURL: 'https://acme.co/pricing?utm_source=john&utm_medium=whatsapp&utm_campaign=sales_outreach_2026',
+                clicks: 3
+            },
+            {
+                id: 'log-4',
+                timestamp: '2026-06-30 17:02:15',
+                salesRep: 'Sasha',
+                campaign: 'sales_outreach_2026',
+                channel: 'Proposal PDF',
+                fullURL: 'https://acme.co/features?utm_source=sasha&utm_medium=proposal_pdf&utm_campaign=sales_outreach_2026',
+                clicks: 1
+            }
+        ];
+
+        // --- Pagination State ---
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        const paginationControls = document.getElementById('pagination-controls');
+
+        // Handles cancelling active typewriter intervals
+        let typewriterTimeout = null;
+
+        // --- DOM Element References ---
+        const campaignForm = document.getElementById('campaign-form');
+        const baseUrlInput = document.getElementById('base-url');
+        const salesRepSelect = document.getElementById('sales-rep');
+        const channelSelect = document.getElementById('channel');
+        const tableBody = document.getElementById('table-body');
+        const logCountBadge = document.getElementById('log-count');
+        const urlClearBtn = document.getElementById('url-clear-btn');
+        const filterChannelSelect = document.getElementById('filter-channel');
+        const sortClicksSelect = document.getElementById('sort-clicks');
+        const filterRepSelect = document.getElementById('filter-rep');
+        const searchUrlInput = document.getElementById('search-url');
+        const thClicks = document.getElementById('th-clicks');
+        const clicksSortArrow = document.getElementById('clicks-sort-arrow');
+
+        // Metrics card references
+        const metricTotalClicksVal = document.getElementById('metric-total-clicks');
+        const metricTopRepVal = document.getElementById('metric-top-rep');
+        const metricTopChannelVal = document.getElementById('metric-top-channel');
+        const insightsTextBreakdown = document.getElementById('insights-text-breakdown');
+
+        // Error references
+        const urlError = document.getElementById('url-error');
+        const repError = document.getElementById('rep-error');
+        const channelError = document.getElementById('channel-error');
+
+        // --- Skill 1: data-cleaner ---
+        /**
+         * Sanitizes and cleans raw URLs.
+         * @param {string} rawUrl 
+         * @returns {string} Cleaned normalized URL.
+         */
+        function cleanData(rawUrl) {
+            if (!rawUrl || !rawUrl.trim()) return '';
+
+            // Correct breakdown processing for URL spaces
+            let urlParts = rawUrl.trim().split('/');
+            for (let i = 1; i < urlParts.length; i++) {
+                if (urlParts[i].includes(' ')) {
+                    // Trim leading/trailing spaces for this specific path segment
+                    let segment = urlParts[i].trim();
+                    // Replace internal spaces between words with a single underscore
+                    urlParts[i] = segment.replace(/\s+/g, '_');
+                }
+            }
+            let url = urlParts.join('/');
+
+            // Step 1: Prepend HTTPS if protocol is missing
+            if (!/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+
+            try {
+                // Step 2: Leverage URL constructor to parse and clean
+                const parsedUrl = new URL(url);
+                
+                // Standardize host name to lowercase
+                let hostname = parsedUrl.hostname.toLowerCase();
+                
+                // Step 3: Remove duplicate slashes in pathname, except protocol
+                let pathname = parsedUrl.pathname.replace(/\/+/g, '/');
+                
+                // Construct basic base
+                let cleaned = parsedUrl.protocol + '//' + hostname;
+                
+                // Add port if custom port is used
+                if (parsedUrl.port) {
+                    cleaned += ':' + parsedUrl.port;
+                }
+                
+                // Add pathname
+                cleaned += pathname;
+                
+                // Transfer existing valid queries (removing empty query values)
+                const newParams = new URLSearchParams();
+                parsedUrl.searchParams.forEach((val, key) => {
+                    if (key.trim() !== '' && val.trim() !== '') {
+                        newParams.append(key.trim(), val.trim());
+                    }
+                });
+                
+                const queryString = newParams.toString();
+                if (queryString) {
+                    cleaned += '?' + queryString;
+                }
+
+                // Remove trailing slash if URL has no pathname, port, queries, or hashes
+                if (cleaned.endsWith('/') && pathname === '/') {
+                    cleaned = cleaned.slice(0, -1);
+                }
+
+                return cleaned;
+            } catch (e) {
+                // Fallback simple sanitizer if URL constructor fails
+                return url.replace(/([^:]\/)\/+/g, "$1");
+            }
+        }
+
+        // --- Skill 2: link-constructor ---
+        /**
+         * Appends campaign parameters onto a base URL.
+         * @param {string} baseUrl - Already cleaned URL from data-cleaner.
+         * @param {string} salesRep - Sales rep name.
+         * @param {string} channel - Distribution channel name.
+         * @returns {string} UTM-tagged campaign URL.
+         */
+        function constructLink(baseUrl, salesRep, channel) {
+            const repParam = salesRep.trim().toLowerCase();
+            
+            // Convert channel name to lowercase and url-friendly format
+            const channelParam = channel.trim().toLowerCase()
+                                        .replace(/\s+/g, '_'); // e.g. "LinkedIn DM" -> "linkedin_dm"
+            
+            const campaignName = 'sales_outreach_2026';
+
+            try {
+                const urlObj = new URL(baseUrl);
+                urlObj.searchParams.set('utm_source', repParam);
+                urlObj.searchParams.set('utm_medium', channelParam);
+                urlObj.searchParams.set('utm_campaign', campaignName);
+                return urlObj.toString();
+            } catch(e) {
+                // Fallback query construction
+                const connector = baseUrl.includes('?') ? '&' : '?';
+                return `${baseUrl}${connector}utm_source=${repParam}&utm_medium=${channelParam}&utm_campaign=${campaignName}`;
+            }
+        }
+
+        // --- Skill 3: analytics-analyst ---
+        /**
+         * Parses campaign logs and generates metrics & text summaries.
+         * @param {Array} logs - Log array.
+         * @returns {Object} Metric counts & natural language analytics text.
+         */
+        function generateAnalyticsSummary(logs) {
+            if (logs.length === 0) {
+                return {
+                    totalClicks: 0,
+                    topRep: '-',
+                    topChannel: '-',
+                    textBreakdown: 'No click activity recorded yet. Create campaign links and simulate engagement to see insights.'
+                };
+            }
+
+            let totalClicks = 0;
+            const repClicksMap = {};
+            const channelClicksMap = {};
+
+            logs.forEach(log => {
+                totalClicks += log.clicks;
+
+                // Cumulative clicks per representative
+                repClicksMap[log.salesRep] = (repClicksMap[log.salesRep] || 0) + log.clicks;
+
+                // Cumulative clicks per channel
+                channelClicksMap[log.channel] = (channelClicksMap[log.channel] || 0) + log.clicks;
+            });
+
+            // Determine Top Sales Rep (resolving ties alphabetically/first-seen)
+            let topRep = '-';
+            let maxRepClicks = -1;
+            for (const rep in repClicksMap) {
+                if (repClicksMap[rep] > maxRepClicks) {
+                    maxRepClicks = repClicksMap[rep];
+                    topRep = rep;
+                } else if (repClicksMap[rep] === maxRepClicks && rep < topRep) {
+                    topRep = rep; // Alphabetical tie-breaker
+                }
+            }
+
+            // Determine Top Channel
+            let topChannel = '-';
+            let maxChannelClicks = -1;
+            for (const chan in channelClicksMap) {
+                if (channelClicksMap[chan] > maxChannelClicks) {
+                    maxChannelClicks = channelClicksMap[chan];
+                    topChannel = chan;
+                } else if (channelClicksMap[chan] === maxChannelClicks && chan < topChannel) {
+                    topChannel = chan;
+                }
+            }
+
+            // Generate analytical text breakdown
+            const repInfo = topRep !== '-' ? `${topRep} (${maxRepClicks} click${maxRepClicks !== 1 ? 's' : ''})` : 'N/A';
+            const channelInfo = topChannel !== '-' ? `${topChannel} (${maxChannelClicks} click${maxChannelClicks !== 1 ? 's' : ''})` : 'N/A';
+
+            const textBreakdown = `Total Engagement: ${totalClicks} click${totalClicks !== 1 ? 's' : ''} tracked. Top Performer: ${repInfo}. Leading Channel: ${channelInfo}.`;
+
+            return {
+                totalClicks,
+                topRep,
+                topChannel,
+                textBreakdown
+            };
+        }
+
+        // --- Application UI Controller Functions ---
+
+        /**
+         * Validates the url format using basic patterns.
+         * @param {string} val 
+         * @returns {boolean}
+         */
+        function isValidURL(val) {
+            if (!val) return false;
+            // Lax URL check that matches paths, query params, etc. after appending protocol
+            let testVal = val;
+            if (!/^https?:\/\//i.test(testVal)) {
+                testVal = 'https://' + testVal;
+            }
+            try {
+                const u = new URL(testVal);
+                return u.hostname.includes('.') && u.hostname.length > 3;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        /**
+         * Sets input fields to valid/invalid visually.
+         */
+        function setFieldValidation(element, errorElement, isValid) {
+            const formGroup = element.closest('.form-group');
+            if (isValid) {
+                formGroup.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            } else {
+                formGroup.classList.add('invalid');
+                errorElement.style.display = 'block';
+            }
+        }
+
+        /**
+         * Triggers a scale and glow bounce animation on values
+         * when they are updated.
+         */
+        function animateMetricUpdate(element) {
+            element.classList.remove('metric-bounce');
+            void element.offsetWidth; // Trigger reflow to restart animation
+            element.classList.add('metric-bounce');
+        }
+
+        /**
+         * Types out insights in the terminal/console.
+         * @param {string} text 
+         */
+        function typewriterEffect(text) {
+            if (typewriterTimeout) {
+                clearInterval(typewriterTimeout);
+            }
+            
+            insightsTextBreakdown.textContent = '';
+            insightsTextBreakdown.classList.add('typing-effect');
+            
+            let index = 0;
+            const speed = 12; // Milliseconds per character for crisp feedback
+            
+            function type() {
+                if (index < text.length) {
+                    insightsTextBreakdown.textContent += text.charAt(index);
+                    index++;
+                    typewriterTimeout = setTimeout(type, speed);
+                } else {
+                    // Remove flashing cursor once typing completes
+                    insightsTextBreakdown.classList.remove('typing-effect');
+                }
+            }
+            
+            type();
+        }
+
+        /**
+         * Recalculates metrics and updates the Insights cards and text console.
+         * @param {boolean} animate - Whether to run the visual pop animations.
+         */
+        function updateInsights(animate = true) {
+            const summary = generateAnalyticsSummary(campaignLogs);
+            
+            // Cache previous values to check if they actually changed (minimizes noise)
+            const prevTotal = metricTotalClicksVal.textContent;
+            const prevRep = metricTopRepVal.textContent;
+            const prevChannel = metricTopChannelVal.textContent;
+
+            // Update Text Content
+            metricTotalClicksVal.textContent = summary.totalClicks;
+            metricTopRepVal.textContent = summary.topRep;
+            metricTopChannelVal.textContent = summary.topChannel;
+
+            // Trigger animations if values changed and animation is requested
+            if (animate) {
+                if (prevTotal !== String(summary.totalClicks)) animateMetricUpdate(metricTotalClicksVal);
+                if (prevRep !== summary.topRep) animateMetricUpdate(metricTopRepVal);
+                if (prevChannel !== summary.topChannel) animateMetricUpdate(metricTopChannelVal);
+            }
+
+            // Write text summary into the Console
+            typewriterEffect(summary.textBreakdown);
+        }
+
+        /**
+         * Copies string to system clipboard.
+         */
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Visual Success Feedback
+                const originalHtml = btnElement.innerHTML;
+                btnElement.innerHTML = '<i class="fa-solid fa-check" style="color: #10b981;"></i>';
+                btnElement.title = "Copied!";
+                
+                setTimeout(() => {
+                    btnElement.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                    btnElement.title = "Copy to clipboard";
+                }, 1500);
+            }).catch(err => {
+                console.error('Could not copy URL: ', err);
+            });
+        }
+
+        /**
+         * Increments click count of a campaign log.
+         * @param {string} logId 
+         * @param {HTMLElement} badgeElement 
+         */
+        function handleSimulateClick(logId, badgeElement) {
+            const log = campaignLogs.find(l => l.id === logId);
+            if (log) {
+                log.clicks += 1;
+                
+                // Update badge UI
+                badgeElement.textContent = log.clicks;
+                
+                // Animate badge
+                badgeElement.classList.remove('badge-pop');
+                void badgeElement.offsetWidth; // Reflow
+                badgeElement.classList.add('badge-pop');
+                
+                // Recalculate metrics and update insights
+                updateInsights(true);
+            }
+        }
+
+        /**
+         * Render the entire campaign logs table body.
+         */
+        function renderTable() {
+            tableBody.innerHTML = '';
+            
+            // Step 1: Sort campaignLogs directly (always sort in place)
+            const sortVal = sortClicksSelect ? sortClicksSelect.value : 'none';
+            if (sortVal === 'high-to-low') {
+                campaignLogs.sort((a, b) => b.clicks - a.clicks);
+            } else if (sortVal === 'low-to-high') {
+                campaignLogs.sort((a, b) => a.clicks - b.clicks);
+            } else {
+                // Chronological descending order by default (newest first)
+                campaignLogs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            }
+
+            // Step 2: Set up arrows inside header
+            if (clicksSortArrow) {
+                if (sortVal === 'high-to-low') {
+                    clicksSortArrow.innerHTML = ' <span class="sort-arrow">▼</span>';
+                } else if (sortVal === 'low-to-high') {
+                    clicksSortArrow.innerHTML = ' <span class="sort-arrow">▲</span>';
+                } else {
+                    clicksSortArrow.innerHTML = '';
+                }
+            }
+
+            // Step 3: Read current filtering options
+            const filterChan = filterChannelSelect ? filterChannelSelect.value : 'all';
+            const filterRep = filterRepSelect ? filterRepSelect.value : 'all';
+            const searchVal = searchUrlInput ? searchUrlInput.value.trim().toLowerCase() : '';
+
+            // Step 4: Pre-filter logs to compute pagination indices
+            const filteredLogs = campaignLogs.filter(log => {
+                const matchChan = (filterChan === 'all' || log.channel === filterChan);
+                const matchRep = (filterRep === 'all' || log.salesRep === filterRep);
+                const matchSearch = (searchVal === '' || log.fullURL.toLowerCase().includes(searchVal));
+                return matchChan && matchRep && matchSearch;
+            });
+
+            // Step 5: Calculate pages and bounds
+            const totalPages = Math.ceil(filteredLogs.length / rowsPerPage);
+            if (currentPage > totalPages) {
+                currentPage = Math.max(1, totalPages);
+            }
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const activePageLogs = filteredLogs.slice(startIndex, endIndex);
+
+            // Step 6: Render rows using forEach loop over campaignLogs (entire array)
+            campaignLogs.forEach(log => {
+                // Render only elements belonging to the active page
+                if (!activePageLogs.includes(log)) {
+                    return;
+                }
+
+                const tr = document.createElement('tr');
+                tr.id = `row-${log.id}`;
+                
+                // Format channel icon
+                let channelIcon = 'fa-solid fa-link';
+                if (log.channel === 'LinkedIn DM') channelIcon = 'fa-brands fa-linkedin-in';
+                else if (log.channel === 'Cold Email') channelIcon = 'fa-solid fa-envelope';
+                else if (log.channel === 'WhatsApp') channelIcon = 'fa-brands fa-whatsapp';
+                else if (log.channel === 'Proposal PDF') channelIcon = 'fa-solid fa-file-pdf';
+
+                tr.innerHTML = `
+                    <td class="timestamp-cell">${log.timestamp}</td>
+                    <td>
+                        <div class="rep-cell">
+                            <span class="rep-avatar ${log.salesRep}">${log.salesRep.charAt(0)}</span>
+                            <span>${log.salesRep}</span>
+                        </div>
+                    </td>
+                    <td><span class="records-count">${log.campaign}</span></td>
+                    <td>
+                        <span class="channel-tag">
+                            <i class="${channelIcon}"></i> ${log.channel}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="url-cell-container">
+                            <span class="url-cell" title="${log.fullURL}">${log.fullURL}</span>
+                            <button class="btn-copy" data-url="${log.fullURL}" title="Copy to clipboard">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="click-badge" id="badge-${log.id}">${log.clicks}</span>
+                    </td>
+                    <td>
+                        <button class="btn-simulate" data-id="${log.id}">
+                            <i class="fa-solid fa-hand-pointer"></i> Simulate Click
+                        </button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(tr);
+            });
+
+            // Step 7: Update the logs count badge directly using campaignLogs.length
+            logCountBadge.textContent = `${campaignLogs.length} URL${campaignLogs.length !== 1 ? 's' : ''} Logged`;
+
+            // Render Pagination Control Bar
+            renderPagination(totalPages);
+
+            // Rebind event listeners
+            bindTableListeners();
+        }
+
+        /**
+         * Renders the pagination controls (Previous, Page Numbers, Next).
+         * @param {number} totalPages 
+         */
+        function renderPagination(totalPages) {
+            if (!paginationControls) return;
+            
+            paginationControls.innerHTML = '';
+            
+            // Hide pagination controls if only 1 page or empty
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Previous Button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            prevBtn.textContent = 'Previous';
+            prevBtn.disabled = (currentPage === 1);
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            paginationControls.appendChild(prevBtn);
+            
+            // Page Numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const numBtn = document.createElement('button');
+                numBtn.className = `pagination-num${i === currentPage ? ' active' : ''}`;
+                numBtn.textContent = i;
+                numBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable();
+                });
+                paginationControls.appendChild(numBtn);
+            }
+            
+            // Next Button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            nextBtn.textContent = 'Next';
+            nextBtn.disabled = (currentPage === totalPages);
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            paginationControls.appendChild(nextBtn);
+        }
+
+        /**
+         * Binds event listeners to dynamically rendered table buttons
+         */
+        function bindTableListeners() {
+            // Copy buttons
+            document.querySelectorAll('.btn-copy').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const url = btn.getAttribute('data-url');
+                    copyToClipboard(url, btn);
+                });
+            });
+
+            // Simulate Click buttons
+            document.querySelectorAll('.btn-simulate').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const logId = btn.getAttribute('data-id');
+                    const badge = document.getElementById(`badge-${logId}`);
+                    handleSimulateClick(logId, badge);
+                });
+            });
+        }
+
+        // --- Form Validation & Submission Handlers ---
+
+        // Toggle clear URL button based on input content
+        baseUrlInput.addEventListener('input', () => {
+            if (baseUrlInput.value.length > 0) {
+                urlClearBtn.style.display = 'block';
+            } else {
+                urlClearBtn.style.display = 'none';
+            }
+            // Remove invalid style on type
+            setFieldValidation(baseUrlInput, urlError, true);
+        });
+
+        urlClearBtn.addEventListener('click', () => {
+            baseUrlInput.value = '';
+            urlClearBtn.style.display = 'none';
+            baseUrlInput.focus();
+            setFieldValidation(baseUrlInput, urlError, true);
+        });
+
+        salesRepSelect.addEventListener('change', () => {
+            setFieldValidation(salesRepSelect, repError, true);
+        });
+
+        channelSelect.addEventListener('change', () => {
+            setFieldValidation(channelSelect, channelError, true);
+        });
+
+        campaignForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Run Form Validation
+            const urlVal = baseUrlInput.value.trim();
+            const repVal = salesRepSelect.value;
+            const channelVal = channelSelect.value;
+            
+            let isFormValid = true;
+
+            if (!isValidURL(urlVal)) {
+                setFieldValidation(baseUrlInput, urlError, false);
+                isFormValid = false;
+            } else {
+                setFieldValidation(baseUrlInput, urlError, true);
+            }
+
+            if (!repVal) {
+                setFieldValidation(salesRepSelect, repError, false);
+                isFormValid = false;
+            } else {
+                setFieldValidation(salesRepSelect, repError, true);
+            }
+
+            if (!channelVal) {
+                setFieldValidation(channelSelect, channelError, false);
+                isFormValid = false;
+            } else {
+                setFieldValidation(channelSelect, channelError, true);
+            }
+
+            if (!isFormValid) {
+                return; // Halt if invalid
+            }
+
+            // Step 1: Run through data-cleaner Skill
+            const cleanedBaseUrl = cleanData(urlVal);
+
+            // Step 2: Run through link-constructor Skill
+            const fullCampaignUrl = constructLink(cleanedBaseUrl, repVal, channelVal);
+
+            // Formulate Timestamp
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            const formattedTimestamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+            // Log the new record
+            const newLogId = 'log-' + Date.now();
+            const newLog = {
+                id: newLogId,
+                timestamp: formattedTimestamp,
+                salesRep: repVal,
+                campaign: 'sales_outreach_2026',
+                channel: channelVal,
+                fullURL: fullCampaignUrl,
+                clicks: 0
+            };
+
+            campaignLogs.push(newLog); // Append to array
+
+            // Reset Form Fields
+            campaignForm.reset();
+            urlClearBtn.style.display = 'none';
+
+            // Reset current page to 1 so the new link is visible at the top of Page 1
+            currentPage = 1;
+
+            // Rerender table
+            renderTable();
+
+            // Visual Cue: Highlight the newly added row
+            const targetRow = document.getElementById(`row-${newLogId}`);
+            if (targetRow) {
+                targetRow.classList.add('row-fade-in', 'row-highlight');
+                setTimeout(() => {
+                    targetRow.classList.remove('row-highlight');
+                }, 1500);
+            }
+
+            // Recalculate metrics and update insights panel (Skill 3: analytics-analyst)
+            updateInsights(true);
+        });
+
+        // --- Initial Launch Setup ---
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initial Render
+            renderTable();
+            // Calculate initial insights without pop animation for clean page load
+            updateInsights(false);
+            
+            // Bind filter and sort change events
+            if (filterChannelSelect) {
+                filterChannelSelect.addEventListener('change', () => {
+                    currentPage = 1;
+                    renderTable();
+                });
+            }
+            if (filterRepSelect) {
+                filterRepSelect.addEventListener('change', () => {
+                    currentPage = 1;
+                    renderTable();
+                });
+            }
+            if (searchUrlInput) {
+                searchUrlInput.addEventListener('input', () => {
+                    currentPage = 1;
+                    renderTable();
+                });
+            }
+            if (sortClicksSelect) {
+                sortClicksSelect.addEventListener('change', () => {
+                    currentPage = 1;
+                    renderTable();
+                });
+            }
+            
+            // Bind clickable table header for sorting
+            if (thClicks) {
+                thClicks.addEventListener('click', () => {
+                    if (!sortClicksSelect) return;
+                    const currentSort = sortClicksSelect.value;
+                    let nextSort = 'high-to-low';
+                    if (currentSort === 'high-to-low') {
+                        nextSort = 'low-to-high';
+                    } else if (currentSort === 'low-to-high') {
+                        nextSort = 'none';
+                    }
+                    sortClicksSelect.value = nextSort;
+                    currentPage = 1;
+                    renderTable();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
