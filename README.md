@@ -19,3 +19,25 @@ The system ensures that 100% of the URL sanitization, standardized tracking stri
 
 ## 3. System Architecture & Multi-Agent Design
 The application rejects monolithic code structures in favor of a specialized multi-agent workflow engineered natively within the **Antigravity** environment using pure web technologies (HTML5, CSS3, and Vanilla JavaScript).
+
+[Raw Input URL] ──> [Data Cleaner Agent] (Regex Pipeline)
+│
+▼
+[Link Constructor Agent] (Object-Mapped Schema)
+│
+▼
+[Analytics Analyst Agent] (In-Memory Aggregator) ──> [UI View]
+
+### Specialized Agents:
+1. **Data Cleaner Agent (Defensive Ingestion):** Intercepts raw inputs and executes a strict regular expression (`regex`) pipeline. It auto-trims structural whitespace and converts accidental internal gaps into clean, standardized underscores (`_`), sanitizing data before compilation.
+2. **Link Constructor Agent (Production Routing):** Maps verified base paths into uniform tracking URLs (`utm_source`, `utm_medium`, `utm_campaign`). It programmatically forces all values to lowercase, enforcing perfect schema discipline required for enterprise analytical compliance.
+3. **Analytics Analyst Agent (Local Intelligence):** Functions as the data engine. It monitors real-time simulated engagement hooks, ingests logs into an isolated in-memory array, increments campaign metrics instantly, and generates natural-language operational summaries directly inside the console view.
+
+---
+
+## 4. Setup & Local Execution Instructions
+Because this system was built natively with zero external frameworks or dependencies, setup is instantaneous.
+
+### Prerequisites:
+* Any modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, or Safari).
+* No terminal installations, `npm install`, or server deployments are required.
